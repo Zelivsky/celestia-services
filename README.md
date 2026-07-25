@@ -3,18 +3,17 @@
 Public infrastructure and tools for Celestia mainnet operators by [Apollo Validator](https://apollo-validator.eu).
 
 [![Celestia](https://img.shields.io/badge/Chain-celestia--mainnet-blue)](https://celestia.org)
-[![RPC](https://img.shields.io/badge/RPC-rpc.apollo--validator.eu-green)](https://rpc.apollo-validator.eu/celestia/)
 
 ## Services
 
 | Service | Endpoint | Status |
 |---|---|---|
-| Public RPC | `https://rpc.apollo-validator.eu/celestia/` | 🟢 Active |
 | Snapshots | `https://snapshots.apollo-validator.eu/celestia/` | 🟢 Active |
-| State Sync Guide | [statesync.md](statesync.md) | 🟢 Active |
-| Peers List | [peers.md](peers.md) (auto-updated) | 🟢 Active |
-| Validator Guide | [guide.md](guide.md) | 🟢 Active |
-| Validator Monitor | @celesta_monitor_apollo_bot | 🟢 Active |
+| Public RPC | Coming soon | 🟡 Planned |
+| State Sync Guide | Coming soon | 🟡 Planned |
+| Peers List | Coming soon | 🟡 Planned |
+| Validator Guide | [guide.md](guide.md) | 🟡 Planned |
+| Validator Monitor | Coming soon | 🟡 Planned |
 
 ## Snapshots
 
@@ -43,43 +42,11 @@ rm -v celestia-snapshot.tar.lz4
 
 ## Public RPC
 
-Base URL: `https://rpc.apollo-validator.eu/celestia/`
-
-### Usage Examples
-
-```bash
-curl -s https://rpc.apollo-validator.eu/celestia/status | jq
-curl -s https://rpc.apollo-validator.eu/celestia/status | jq -r '.result.sync_info.latest_block_height'
-curl -s https://rpc.apollo-validator.eu/celestia/net_info | jq -r '.result.n_peers'
-```
-
-### Configuration
-
-```
-RPC URL: https://rpc.apollo-validator.eu/celestia/
-Chain ID: celestia
-```
+Coming soon.
 
 ## Validator Monitor Bot
 
-**Bot:** [@celesta_monitor_apollo_bot](https://t.me/celesta_monitor_apollo_bot)
-
-### Commands
-
-| Command | Description |
-|---------|-------------|
-| `/add <address>` | Add validator to monitoring |
-| `/remove <address>` | Remove validator |
-| `/list` | List your validators |
-| `/status` | Show network info |
-| `/help` | Show help |
-
-### Auto Alerts
-
-- 🚨 RPC unreachable
-- ⚠️ Validator left active set
-- ⚠️ Zero voting power
-- ⚠️ Low peers
+Coming soon.
 
 ## Validator Guide
 
