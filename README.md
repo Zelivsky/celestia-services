@@ -15,7 +15,7 @@ Public infrastructure for the **Celestia mainnet** (chain-id `celestia`) by Apol
 | 3 | [Public RPC](#public-rpc) | [rpc.apollo-validator.eu/celestia/](https://rpc.apollo-validator.eu/celestia/status) | 🟢 Active |
 | 4 | [State Sync](#state-sync) | [this section](#state-sync) | 🟢 Active |
 | 5 | [Validator Guide](guide.md) | [guide.md](guide.md) | 🟢 Active |
-| 6 | Validator Monitor Bot | — | 🟡 Planned |
+| 6 | Validator Monitor Bot | [@celestia_monitoring_bot](https://t.me/celestia_monitoring_bot) | 🟢 Active |
 
 ## Public RPC
 
@@ -128,7 +128,12 @@ block sync), validator registration, on-chain upgrade procedure, cheat sheet.
 
 ## Validator Monitor Bot
 
-Telegram watchlist bot for Celestia — **planned**, not yet active.
+Telegram watchlist bot for Celestia mainnet: **[@celestia_monitoring_bot](https://t.me/celestia_monitoring_bot)**.
+
+- Node status, live peers, latest snapshot
+- Watchlist (`/add` moniker / hex / celestiavaloper…) with missed-block alerts
+- `/check` uptime over the last 50 blocks
+- Alerts are **watchlist-based only** (no auto-watch of the whole active set)
 
 ## Links
 
