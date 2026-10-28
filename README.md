@@ -40,7 +40,7 @@ curl -s https://rpc.apollo-validator.eu/celestia/validators | jq '.result.valida
 
 - **Page:** [snapshots.apollo-validator.eu/celestia/](https://snapshots.apollo-validator.eu/celestia/)
 - **Every 6 hours**, only the latest archive is kept (`data/` of a pruned node, lz4)
-- Typical size: **~4 GB** compressed (pruning `custom` keep-recent 100 / interval 19, `min-retain-blocks` 600000, indexer off)
+- Typical size: **~48 GB** compressed and growing with chain height (pruning `custom` keep-recent 100 / interval 19, `min-retain-blocks` 600000, indexer off) — always take the exact size from the API below
 
 ```bash
 # Latest metadata (height / size / sha256)
@@ -62,7 +62,7 @@ CometBFT state-sync snapshots every **1500 blocks** (keeps last 2).
 
 ```toml
 # ~/.celestia-app/config/config.toml
-[state_sync]
+[statesync]
 enable = true
 rpc_servers = "https://rpc.apollo-validator.eu/celestia/,https://celestia-mainnet-rpc.itrocket.net"
 trust_height = <TRUST_HEIGHT>
@@ -81,7 +81,7 @@ Then start `celestia-appd` — it downloads a recent state snapshot and syncs th
 ## Peers List
 
 - **Page:** [snapshots.apollo-validator.eu/celestia/peers.html](https://snapshots.apollo-validator.eu/celestia/peers.html)
-- **Raw:** [peers.md](https://snapshots.apollo-validator.eu/peers.md)
+- **Raw:** [peers.md](https://snapshots.apollo-validator.eu/celestia/peers.md)
 - Verified every 6 hours (TCP probe)
 
 ### Quick Setup
@@ -109,15 +109,16 @@ Source: [celestiaorg/networks/celestia/seeds.txt](https://github.com/celestiaorg
 
 ## Installation Guide
 
-Short version in [guide.md](guide.md) (requirements, binary version pin, genesis + sha256,
-config, start, validator registration).
+Full install **and** upgrade guide in [guide.md](guide.md): hardware, Go, pinned
+`celestia-app` build, genesis + sha256, config, sync (snapshot / state sync /
+block sync), validator registration, on-chain upgrade procedure, cheat sheet.
 
 ## Chain Information
 
 | | |
 |---|---|
 | Chain ID | `celestia` |
-| Binary | `celestia-appd` **v9.0.8** (chain app version `9`; latest release [v10.4.0](https://github.com/celestiaorg/celestia-app/releases) awaits a chain upgrade — take the version the chain runs, from official release notes/gov proposals) |
+| Binary | `celestia-appd` **v10.5.0** (compatible version per [networks overview](https://docs.celestia.org/operate/networks/overview); never run a binary newer than the chain requires — check gov proposals / official release notes before upgrading) |
 | Genesis | [celestiaorg/networks/celestia/genesis.json](https://raw.githubusercontent.com/celestiaorg/networks/main/celestia/genesis.json) |
 | Genesis SHA256 | `9727aac9bbfb021ce7fc695a92f901986421283a891b89e0af97bc9fad187793` (87,995,175 bytes) |
 | Ports | P2P `36656`, RPC `36657` (proxied publicly), gRPC `36090` |

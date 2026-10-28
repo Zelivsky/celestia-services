@@ -98,8 +98,8 @@ pruning-interval = "19"</pre>
 <div class="step"><span class="step-num">2</span><span class="step-title">Stop the node</span><pre>sudo systemctl stop celestia-appd</pre></div>
 <div class="step"><span class="step-num">3</span><span class="step-title">Back up validator state (validators only)</span><pre>cp ~/.celestia-app/data/priv_validator_state.json ~/.celestia-app/priv_validator_state.json.bak</pre></div>
 <div class="step"><span class="step-num">4</span><span class="step-title">Download the snapshot and checksum</span><pre>cd ~/.celestia-app
-wget -O @@FILE@@ https://snapshots.apollo-validator.eu/snapshots/@@FILE@@
-wget -O @@FILE@@.sha256 https://snapshots.apollo-validator.eu/snapshots/@@FILE@@.sha256</pre></div>
+wget -O @@FILE@@ https://snapshots.apollo-validator.eu/celestia/snapshots/@@FILE@@
+wget -O @@FILE@@.sha256 https://snapshots.apollo-validator.eu/celestia/snapshots/@@FILE@@.sha256</pre></div>
 <div class="step"><span class="step-num">5</span><span class="step-title">Verify checksum</span><pre>sha256sum -c @@FILE@@.sha256</pre></div>
 <div class="step"><span class="step-num">6</span><span class="step-title">Reset node state and extract</span><pre>cd ~/.celestia-app
 celestia-appd tendermint unsafe-reset-all --home ~/.celestia-app --keep-addr-book
