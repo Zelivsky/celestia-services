@@ -13,7 +13,7 @@ Public infrastructure for the **Celestia mainnet** (chain-id `celestia`) by Apol
 | 1 | [Snapshots](#snapshots) | [snapshots.apollo-validator.eu/celestia/](https://snapshots.apollo-validator.eu/celestia/) | 🟢 Active |
 | 2 | [Peers List](#peers-list) | [snapshots.apollo-validator.eu/celestia/peers.html](https://snapshots.apollo-validator.eu/celestia/peers.html) | 🟢 Active |
 | 3 | [Public RPC](#public-rpc) | [rpc.apollo-validator.eu/celestia/](https://rpc.apollo-validator.eu/celestia/status) | 🟢 Active |
-| 4 | [State Sync](#state-sync) | [this section](#state-sync) | 🟢 Active |
+| 4 | [State Sync](#state-sync) | [snapshots.apollo-validator.eu/celestia/statesync.html](https://snapshots.apollo-validator.eu/celestia/statesync.html) | 🟢 Active |
 | 5 | [Validator Guide](guide.md) | [guide.md](guide.md) | 🟢 Active |
 | 6 | Validator Monitor Bot | [@celestia_monitoring_bot](https://t.me/celestia_monitoring_bot) | 🟢 Active |
 
@@ -60,8 +60,11 @@ and `priv_validator_state.json` backup) is on the [snapshot page](https://snapsh
 Join the network in minutes without downloading a tarball. Our node publishes
 CometBFT state-sync snapshots every **1500 blocks** (keeps last 2).
 
+**Full step-by-step page:** [snapshots.apollo-validator.eu/celestia/statesync.html](https://snapshots.apollo-validator.eu/celestia/statesync.html)
+
+Quick config (`~/.celestia-app/config/config.toml`):
+
 ```toml
-# ~/.celestia-app/config/config.toml
 [statesync]
 enable = true
 rpc_servers = "https://rpc.apollo-validator.eu/celestia/,https://celestia-mainnet-rpc.itrocket.net"

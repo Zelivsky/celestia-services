@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestia State Sync - Apollo Validator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6}
+.container{max-width:860px;margin:0 auto;padding:40px 20px}
+h1{font-size:28px;margin-bottom:8px;color:#fff}
+h2{font-size:20px;margin:32px 0 16px;color:#fff}
+.subtitle{color:#888;margin-bottom:32px;font-size:14px}
+.back{color:#666;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:24px}
+.back:hover{color:#fff}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:24px;margin-bottom:24px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222}
+.row:last-child{border-bottom:none}
+.label{color:#888}
+.value{color:#fff;font-family:monospace;word-break:break-all;text-align:right}
+pre{background:#111;border:1px solid #333;border-radius:8px;padding:16px;overflow-x:auto;margin:12px 0;font-size:13px;color:#a0a0a0;white-space:pre-wrap;word-break:break-all}
+.note{color:#666;font-size:13px;margin-top:12px}
+.warning{background:#1a1208;border:1px solid #92400e;border-radius:8px;padding:16px;margin:16px 0;color:#fbbf24;font-size:14px}
+.warning strong{color:#f59e0b}
+.info{background:#0a1628;border:1px solid #1e40af;border-radius:8px;padding:16px;margin:16px 0;color:#60a5fa;font-size:14px}
+.info strong{color:#3b82f6}
+.step{margin-bottom:24px}
+.step-num{display:inline-block;background:#2563eb;color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:14px;font-weight:600;margin-right:8px}
+.step-title{font-weight:600;color:#fff;font-size:16px}
+p{margin-bottom:12px;color:#ccc;font-size:14px}
+a{color:#60a5fa}
+.links{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.link{padding:10px 20px;border-radius:8px;background:#1a1a1a;border:1px solid #333;color:#888;text-decoration:none;font-size:14px}
+.link.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.link:hover{border-color:#60a5fa;color:#fff}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="https://apollo-validator.eu" class="back">&larr; Back to Apollo Validator</a>
+<h1>Celestia State Sync</h1>
+<p class="subtitle">Fast node synchronization via state sync protocol. No need to sync from genesis.</p>
+
+<div class="links">
+<a href="index.html" class="link">Snapshots</a>
+<a href="statesync.html" class="link active">State Sync</a>
+<a href="peers.html" class="link">Peers</a>
+</div>
+
+<div class="info"><strong>State Sync</strong> allows your node to sync by downloading a recent state snapshot from peers, without replaying all historical blocks. This is typically faster than block-by-block sync. Our node publishes CometBFT state-sync snapshots every <strong>1500 blocks</strong> (keeps last 2).</div>
+
+<div class="card">
+<h2>State Sync</h2>
+<div class="warning"><strong>WARNING:</strong> This will reset your node data. If you are running a validator, back up <code>data/priv_validator_state.json</code> FIRST to avoid double-signing after restore.</div>
+
+<div class="step"><span class="step-num">1</span><span class="step-title">Stop the node</span><pre>sudo systemctl stop celestia-appd</pre></div>
+
+<div class="step"><span class="step-num">2</span><span class="step-title">Back up validator state (validators only)</span><pre>cp ~/.celestia-app/data/priv_validator_state.json ~/.celestia-app/priv_validator_state.json.bak</pre></div>
+
+<div class="step"><span class="step-num">3</span><span class="step-title">Run state sync</span><pre>SNAP_RPC=https://rpc.apollo-validator.eu/celestia/
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
+
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,https://celestia-mainnet-rpc.itrocket.net\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.celestia-app/config/config.toml</pre></div>
+
+<div class="step"><span class="step-num">4</span><span class="step-title">Reset node data</span><pre>celestia-appd tendermint unsafe-reset-all --home ~/.celestia-app --keep-addr-book</pre></div>
+
+<div class="step"><span class="step-num">5</span><span class="step-title">Restore validator state (validators only)</span><pre>cp ~/.celestia-app/priv_validator_state.json.bak ~/.celestia-app/data/priv_validator_state.json</pre></div>
+
+<div class="step"><span class="step-num">6</span><span class="step-title">Start node</span><pre>sudo systemctl restart celestia-appd && journalctl -fu celestia-appd -n1000 -o cat</pre></div>
+
+<div class="step"><span class="step-num">7</span><span class="step-title">Verify sync</span><pre>curl -s http://127.0.0.1:36657/status | jq -r .result.sync_info.catching_up
+# expect: false once synced (can take a few minutes after state sync)</pre></div>
+</div>
+
+<div class="card">
+<h2>Useful Links</h2>
+<div class="row"><span class="label">RPC</span><span class="value"><a href="https://rpc.apollo-validator.eu/celestia/status">rpc.apollo-validator.eu/celestia</a></span></div>
+<div class="row"><span class="label">gRPC</span><span class="value">grpc.apollo-validator.eu (port 36090 upstream)</span></div>
+<div class="row"><span class="label">Snapshots</span><span class="value"><a href="index.html">index.html</a></span></div>
+<div class="row"><span class="label">Peers</span><span class="value"><a href="peers.html">peers.html</a></span></div>
+<div class="row"><span class="label">Guide</span><span class="value"><a href="https://github.com/Zelivsky/celestia-services/blob/main/guide.md">guide.md</a></span></div>
+<div class="row"><span class="label">Explorer</span><span class="value"><a href="https://www.mintscan.io/celestia">mintscan.io/celestia</a></span></div>
+</div>
+
+<p class="note">Powered by Apollo Validator.</p>
+</div>
+</body>
+</html>

@@ -419,6 +419,8 @@ Only the latest archive is kept.
 
 ### Option B — state sync
 
+**Full step-by-step page:** [snapshots.apollo-validator.eu/celestia/statesync.html](https://snapshots.apollo-validator.eu/celestia/statesync.html)
+
 ```toml
 # ~/.celestia-app/config/config.toml
 [statesync]
