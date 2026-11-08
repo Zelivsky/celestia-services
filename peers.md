@@ -1,9 +1,9 @@
 # Celestia Peers
 
-**Height:** 15695144
+**Height:** 15702732
 **Peers:** 12
 
-Last updated: 2026-11-08 06:04 UTC | Verified: 12/24
+Last updated: 2026-11-08 12:04 UTC | Verified: 12/25
 
 ## How we collect peers
 
