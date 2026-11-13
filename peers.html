@@ -51,20 +51,20 @@ a{color:#60a5fa}
 <h2>Peer Stats</h2>
 <div class="row"><span class="label">Network</span><span class="value">Celestia Mainnet</span></div>
 <div class="row"><span class="label">Chain ID</span><span class="value">celestia</span></div>
-<div class="row"><span class="label">Height</span><span class="value">15,854,391</span></div>
-<div class="row"><span class="label">Verified Peers</span><span class="value">11/21</span></div>
-<div class="row"><span class="label">Last Updated</span><span class="value">2026-11-13 12:04 UTC</span></div>
+<div class="row"><span class="label">Height</span><span class="value">15,861,965</span></div>
+<div class="row"><span class="label">Verified Peers</span><span class="value">12/25</span></div>
+<div class="row"><span class="label">Last Updated</span><span class="value">2026-11-13 18:04 UTC</span></div>
 </div>
 
 <div class="card">
 <h2>Quick Setup</h2>
 <div class="step"><span class="step-num">1</span><span class="step-title">Copy persistent_peers</span>
 <p>Click the button to copy the verified peers string to your clipboard.</p>
-<pre id="peers-str">0e0787c2aafb0e03f0e5b99e866eaf11adfe0c0d@64.130.47.114:26656,9f21a4f163710710aa7932e1832a257ef326186f@135.181.227.236:40656,6d34d1f26e35f6b3cd9886789ff4fc6b9dbfcf77@64.130.41.69:26656,f12493a5a69bac967cd9bd04b32589bdbe954ee7@136.243.94.113:26666,0c380953bd93a8a2d999c89d26152386429cfdb0@185.26.11.135:26656,da2e194590fa122b68a487d3d417fe6cd0b8e457@85.195.79.254:26656,bf40271a7abdc7fcf5e2f6929c54dcb6e88c7541@57.129.87.205:26656,b78864a1b3c0a48ba1128e5246a8a9834d8ff620@145.239.232.71:10056,f63f84d496b4f5e5408c7ce60bbfcf5d4ec3c4d4@109.228.35.84:26656,fc25a389790d9f1e8dc39496313e1e0fe2b138f7@135.181.138.95:2890,4c488ed2e06731599122cfc7d7c0a8068c5cc550@116.202.237.217:26656</pre>
+<pre id="peers-str">0e0787c2aafb0e03f0e5b99e866eaf11adfe0c0d@64.130.47.114:26656,9f21a4f163710710aa7932e1832a257ef326186f@135.181.227.236:40656,6d34d1f26e35f6b3cd9886789ff4fc6b9dbfcf77@64.130.41.69:26656,f12493a5a69bac967cd9bd04b32589bdbe954ee7@136.243.94.113:26666,0c380953bd93a8a2d999c89d26152386429cfdb0@185.26.11.135:26656,da2e194590fa122b68a487d3d417fe6cd0b8e457@85.195.79.254:26656,bf40271a7abdc7fcf5e2f6929c54dcb6e88c7541@57.129.87.205:26656,b78864a1b3c0a48ba1128e5246a8a9834d8ff620@145.239.232.71:10056,f63f84d496b4f5e5408c7ce60bbfcf5d4ec3c4d4@109.228.35.84:26656,fc25a389790d9f1e8dc39496313e1e0fe2b138f7@135.181.138.95:2890,4c488ed2e06731599122cfc7d7c0a8068c5cc550@116.202.237.217:26656,ce99d7da2530f75d05880d13d9eda384d5a1afe4@57.128.22.78:23356</pre>
 <button class="btn" onclick="copyPeers()">Copy PEERS</button>
 </div>
 <div class="step"><span class="step-num">2</span><span class="step-title">Apply to config.toml</span>
-<pre>sed -i 's/^persistent_peers = .*/persistent_peers = "0e0787c2aafb0e03f0e5b99e866eaf11adfe0c0d@64.130.47.114:26656,9f21a4f163710710aa7932e1832a257ef326186f@135.181.227.236:40656,6d34d1f26e35f6b3cd9886789ff4fc6b9dbfcf77@64.130.41.69:26656,f12493a5a69bac967cd9bd04b32589bdbe954ee7@136.243.94.113:26666,0c380953bd93a8a2d999c89d26152386429cfdb0@185.26.11.135:26656,da2e194590fa122b68a487d3d417fe6cd0b8e457@85.195.79.254:26656,bf40271a7abdc7fcf5e2f6929c54dcb6e88c7541@57.129.87.205:26656,b78864a1b3c0a48ba1128e5246a8a9834d8ff620@145.239.232.71:10056,f63f84d496b4f5e5408c7ce60bbfcf5d4ec3c4d4@109.228.35.84:26656,fc25a389790d9f1e8dc39496313e1e0fe2b138f7@135.181.138.95:2890,4c488ed2e06731599122cfc7d7c0a8068c5cc550@116.202.237.217:26656"/' ~/.celestia-app/config/config.toml</pre>
+<pre>sed -i 's/^persistent_peers = .*/persistent_peers = "0e0787c2aafb0e03f0e5b99e866eaf11adfe0c0d@64.130.47.114:26656,9f21a4f163710710aa7932e1832a257ef326186f@135.181.227.236:40656,6d34d1f26e35f6b3cd9886789ff4fc6b9dbfcf77@64.130.41.69:26656,f12493a5a69bac967cd9bd04b32589bdbe954ee7@136.243.94.113:26666,0c380953bd93a8a2d999c89d26152386429cfdb0@185.26.11.135:26656,da2e194590fa122b68a487d3d417fe6cd0b8e457@85.195.79.254:26656,bf40271a7abdc7fcf5e2f6929c54dcb6e88c7541@57.129.87.205:26656,b78864a1b3c0a48ba1128e5246a8a9834d8ff620@145.239.232.71:10056,f63f84d496b4f5e5408c7ce60bbfcf5d4ec3c4d4@109.228.35.84:26656,fc25a389790d9f1e8dc39496313e1e0fe2b138f7@135.181.138.95:2890,4c488ed2e06731599122cfc7d7c0a8068c5cc550@116.202.237.217:26656,ce99d7da2530f75d05880d13d9eda384d5a1afe4@57.128.22.78:23356"/' ~/.celestia-app/config/config.toml</pre>
 </div>
 <div class="step"><span class="step-num">3</span><span class="step-title">Restart node</span>
 <pre>sudo systemctl restart celestia-appd</pre>
